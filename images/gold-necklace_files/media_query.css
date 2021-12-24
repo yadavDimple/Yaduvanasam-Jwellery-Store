@@ -1,0 +1,71 @@
+
+/*media queries*/
+@media(max-width: 1600px) {
+.taga_li {width: 18.5%;}
+.tag_small_font {font-size: 25px;}
+.taga_cont {margin-top: 50px;}
+.fb_iframe_widget {height: 275px!important;overflow: hidden;}
+.bx_cust_head {margin: 10px 0 55px 0;}
+.js-1 li, .js-2 li {width: 143px;}
+.img_resp a img {margin-top: -37px;}
+ #emi_pop_Wrapper {margin-top: 40px;}
+}
+/* @media(max-width: 1500px) {
+.cartHolder {right: 117px}
+} */
+@media(max-width: 1480px) {
+.col_style_new {margin-bottom:9px;}
+}
+@media (max-width: 1450px) {
+#popup251 {left: 0px;}
+.header-container .header .header-top .nav ul.nav_menu li.menu_level_0 {padding: 5px 10px 10px 10px;}
+.tag_small_font {font-size: 25px;}
+.taga_cont {margin-top: 25px;}
+.tag_btn {margin: 18px 0;}
+.details-top-right h1 {font-size: 21px!important;}
+/* .wishinproduct {margin-right: 7%;} */
+.searches-keywords-related a {font-size: 12px;}
+}
+@media (max-width: 1380px) {
+#popup251 {left: 0px;}
+.seoFooterMarginRight {font-size: 11px;}
+.homeBlogContent {right:10px;bottom: 5px;}
+ .catalog-category-view .sidebar .block-layered-nav dd {padding-left: 5px!important;padding-left: 0 !important;}
+}
+@media (max-width: 1368px) {
+.header-container .header .header-top .nav ul.nav_menu li.menu_level_0 {padding: 5px 10px 20px 10px;}
+.col_style_new {margin-bottom:8px;}
+.news_Letters {width: 98%;}
+.tag_small_font {font-size: 25px;}
+.taga_cont {margin-top: 27px;}
+.tag_btn {margin: 16px 0;}
+.subs_area {width: 80%;}
+.left_padding {padding-left: 8%;}
+.tag_hidden {display: none!important;}
+.news_letters_BTN__ {font-size: 11px;}
+/* .top-blank {margin-top: 160px;} */
+.img_resp {height: 309px;}
+.img_resp a img {margin-top: -30px;}
+/* .wishinproduct {margin-right: 9%;} */
+.taga_cont .common_main_head {font-size: 25px;}
+#tagalys-namespace.tagalys-my-feed-sections {margin-top: 0!important;padding-top:10px!important;}
+}
+@media (max-width: 1300px) {
+.header-container .header .header-top .nav ul.nav_menu li.menu_level_0 {padding: 5px 7px 10px 7px;}
+.candere_Icon {left: -11px;}
+.js-1 li, .js-2 li {width: 142px;}
+.jewellerySubMenu {width: 104%;right: -33px;}
+#popup325 {width: 101%!important;}
+}
+@media(max-width: 1290px) {
+.form-search #search {width: 200px;}
+#menu251 {padding-left: 0;}
+}
+@media(max-width: 1280px) {
+.tag_small_font {font-size: 20px;}
+.taga_cont {margin-top: 25px;}
+.tag_btn {margin: 15px 0;}
+.left_padding {padding-left: 7%;}
+.js-1 li, .js-2 li {width: 136px;}
+}
+/*media queries*/

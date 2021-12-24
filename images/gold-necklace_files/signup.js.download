@@ -1,0 +1,182 @@
+try {
+  jQuery("#ex7").on("click", '.close-modal', function () {
+    createCookie('default_pop_up_close', 'xyz', '1');
+    console.log("btnlick_close");
+    dataLayer.push({
+      'event': 'auto_signup_popup',
+      'userEvent': 'Button-Click-Popup-Close'
+    });
+  });
+
+}
+catch (e) { }
+jQuery(document).ready(function () {
+  jQuery(document).on("click", ".jquery-modal.blocker.current", function (event) {
+    if (event.target.className == "jquery-modal blocker current") {
+      console.log("Backdrop-Click-Popup-Close");
+      dataLayer.push({
+        'event': 'auto_signup_popup',
+        'userEvent': 'Backdrop-Click-Popup-Close'
+      });
+    }
+  })
+});
+var degree = 7200;
+var clicks = 5;
+jQuery(document).ready(function () {
+  jQuery("#popup_spin").click(function () {
+    jQuery("#popup_spin").attr("disabled", "disabled");
+    clicks++;
+
+    var Url = minifyjsurl + "productajaxload/index/signup";
+
+    jQuery.ajax({
+      url: Url,
+      type: "POST",
+      dataType: "json",
+
+      success: function (data) {
+        var dataLayer = window.dataLayer || [];
+        dataLayer.push({ 'event': 'signup', 'signup_event': data.signup_event });
+        if (data["winner"]) {
+          var winner = data["winner"];
+
+          var newDegree = 7200 * clicks;
+          var extraDegree = data["no"];
+          var totalDegree = newDegree + extraDegree;
+          jQuery("#popup_wheel .popup_sec").each(function () {
+            var t = jQuery(this);
+            var noY = 0;
+
+            var c = 0;
+            var n = 700;
+            var interval = setInterval(function () {
+              c++;
+              if (c === n) {
+                clearInterval(interval);
+              }
+
+              var aoY = t.offset().top;
+              if (aoY < 23.89) {
+                console.log("<<<<<<<<");
+                jQuery("#popup_spin").addClass("popup_spin");
+                setTimeout(function () {
+                  jQuery("#popup_spin").removeClass("popup_spin");
+                }, 100);
+              }
+            }, 10);
+
+            jQuery("#popup_inner-wheel").css({
+              transform: "rotate(" + totalDegree + "deg)"
+            });
+
+            noY = t.offset().top;
+          });
+          setTimeout(function () {
+            jQuery(".lottery_result").css("padding", "5px 30px");
+            jQuery(".lottery_result").text(data["winner"]);
+            createCookie("default_pop_up_close", "xyz", "365");
+          }, 6000);
+          setTimeout(function () {
+            //window.location = signup_success_url;
+            var form = document.createElement('form');
+            form.setAttribute('method', 'POST');
+            form.setAttribute('action', signup_success_url);
+            document.body.appendChild(form);
+            form.submit();
+          }, 14000);
+        } else {
+          jQuery(".lottery_result").css("padding", "5px 30px");
+          jQuery(".lottery_result").text(
+            "Fill in the details & click on Sign Up to Spin the wheel"
+          );
+          setTimeout(function () {
+            jQuery(".lottery_result").text("");
+            jQuery(".lottery_result").css("padding", "0 30px");
+          }, 3000);
+          //alert('fill all details');
+          jQuery("#popup_spin").removeAttr("disabled");
+        }
+      }
+    });
+  });
+});
+
+if(localStorage.getItem("total_seconds")){
+  var total_seconds = localStorage.getItem("total_seconds");
+} else {
+  var total_seconds = 150;
+}
+var minutes = parseInt(total_seconds/60);
+var seconds = parseInt(total_seconds%60);
+
+function countDownTimer() {
+  console.log("Repeating countdown............");
+  if(seconds < 10){
+    seconds= "0"+ seconds ;
+  }if(minutes < 10){
+    minutes= "0"+ minutes ;
+  }
+
+  if(total_seconds <= 0) {
+
+    if (!readCookie('default_pop_up_outside_click_close') && !readCookie('default_pop_up_close')) {
+
+      if (window.location.href.indexOf("KJOfficial") > -1 || window.location.href.indexOf("kjofficial") > -1 || window.location.href.indexOf("Kjofficial") > -1) {
+        if(localStorage.getItem("total_seconds"))
+          { var popuptimeout = 0 ; } 
+        else 
+          { var popuptimeout = 50000 ; }
+      } else {
+        var popuptimeout = 0;
+      }
+      try {
+        var restrictPageArrOnPageLoad = ["jewellery-savings-scheme.html", "scheme/index", "ravana-game", "customer/account/login", "kalyan-jewellers-gold-ownership-certificate.html"];
+        var isRestrictURLPartExist = restrictPageArrOnPageLoad.some(function (el) {
+          return ~document.URL.indexOf(el);
+        });
+        if (isRestrictURLPartExist == false) {
+          var signuptimeout = setTimeout(function () {
+            jQuery('#ex7').modal({ fadeDuration: 350 });
+            console.log("automatic_popup comes");
+            dataLayer.push({
+              'event': 'auto_signup_popup',
+              'userEvent': 'Automatic-Popup-Open'
+            });
+            window.addEventListener('click', function (e) {
+              if (document.getElementById('ex7').contains(e.target)) {
+                // Clicked in box
+              } else {
+                createCookie('default_pop_up_outside_click_close', 'xyz', '0.5');
+              }
+            });
+          }, popuptimeout);
+        } else {
+          console.log('url - ' + document.URL + ' isRestrictURLPartExist= ' + isRestrictURLPartExist);
+        }
+
+        localStorage.setItem("total_seconds", 150);
+        
+        jQuery('a[href="#ex20"]').click(function (e) {
+          clearTimeout(signuptimeout);
+          jQuery('#ex20').modal({ fadeDuration: 250 });
+        });
+        jQuery('a[href="#ex7"]').click(function (e) {
+          clearTimeout(signuptimeout);
+          jQuery('#ex7').modal({ fadeDuration: 250 });
+        });
+        jQuery('.signInhover').click(function (e) {
+          clearTimeout(signuptimeout);
+        });
+      } catch (e) { }
+    }
+
+  } else {
+    total_seconds = total_seconds - 1 ;
+    minutes = parseInt(total_seconds/60);
+    seconds = parseInt(total_seconds%60);
+    localStorage.setItem("total_seconds",total_seconds);
+    setTimeout(function () { countDownTimer(); }, 1000);
+  }
+}
+countDownTimer();

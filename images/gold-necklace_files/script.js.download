@@ -1,0 +1,233 @@
+function slotMachineActive(){    
+// let count = 0;
+
+
+var Url = minifyjsurl + "productajaxload/index/slot";
+jQuery.ajax({
+  url: Url,
+  type: "POST",
+  dataType: "json",
+
+
+  success: function(data) {
+
+    var randomValue = data['no'];
+    var winner = data['winner'];
+
+
+    const casino1 = document.querySelector('#casino1');
+    const casino2 = document.querySelector('#casino2');
+    const casino3 = document.querySelector('#casino3');
+
+    const mCasino1 = new SlotMachine(casino1, {
+      active: 1,
+      delay: 500,
+      direction: 'down',
+      randomize() {
+        return randomValue;
+      }
+    });
+    const mCasino2 = new SlotMachine(casino2, {
+      active: 1,
+      delay: 500,
+      randomize() {
+        return randomValue;
+      }
+    });
+    const mCasino3 = new SlotMachine(casino3, {
+      active: 1,
+      delay: 500,
+      direction: 'down',
+      randomize() {
+        return randomValue;
+      }
+    });
+
+    count = 3;
+
+    mCasino1.shuffle(10);
+    mCasino2.shuffle(10);
+    mCasino3.shuffle(10);
+
+
+
+    setTimeout(function(){
+      jQuery('.slot_success_message').html(winner);
+    },6000) ;
+  }
+
+
+
+});
+
+
+
+
+
+
+
+
+
+}
+
+jQuery(".div_registerMe1").click(function() {
+  jQuery("#utm_newsletter_spinner").css("display", "none");
+  var e = jQuery("#email").val(),
+  t = jQuery("#firstname").val(),
+  i = jQuery("#mobile_number").val(),
+  n = jQuery("#userPassword").val(),
+  r = (jQuery("#userCPassword").val(),
+    jQuery("input[name=utm_gender]:checked").val()),
+  s = jQuery("input[name=is_subscribed]:checked").val(),
+  o = jQuery("input[name=agreeRestrictedItems]:checked").val(),
+  wo = jQuery("input[name=whatsappOptIn]:checked").val(),
+  l = e.indexOf("@"),
+  a = e.lastIndexOf("."),
+  u = i;
+  if (null == t || "" == t)
+    return (
+      jQuery("#varname1").css("display", "block"),
+      jQuery("#varname1").text("Please Enter the Name!"),
+      !1
+      );
+  if (0 == /^[a-zA-Z\s]+$/.match(t))
+    return (
+      jQuery("#varname1").css("display", "block"),
+      jQuery("#varname1").text("Please Enter the Valid Name!"),
+      !1
+      );
+  if (0 == /^[^\s]+(\s+[^\s]+)*$/.match(t))
+    return (
+      jQuery("#varname1").css("display", "block"),
+      jQuery("#varname1").text("Please Enter the Valid Name!"),
+      !1
+      );
+  if ((jQuery("#varname1").css("display", "none"), null == e || "" == e))
+    return (
+      jQuery("#varemail").css("display", "block"),
+      jQuery("#varemail_none").css("display", "none"),
+      jQuery("#varemail").text("Please Enter the Email ID!"),
+      !1
+      );
+  if (
+    (jQuery("#varemail").css("display", "none"),
+      1 > l || l + 2 > a || a + 2 >= e.length)
+    )
+    return (
+      jQuery("#varemail_none").css("display", "block"),
+      jQuery("#varemail").css("display", "none"),
+      jQuery("#varemail_none").text("Please Enter the valid Email ID!"),
+      !1
+      );
+  if (
+    (jQuery("#varemail_none").css("display", "none"),
+      null == i ||
+      "" == i ||
+      (validateMobileNumberWithCountryCode(u,document.getElementById('mobile_number'))==false)
+      ) 
+    )
+    return (
+      jQuery("#valrmobile").html("Please enter valid mobile number!"),
+      jQuery("#valrmobile").css("display", "block"),
+      !1
+      );
+  if (0 == /^[0-9]+$/.match(jQuery("#mobile_number").val()))
+    return (
+      jQuery("#valrmobile").html("Please enter a valid mobile number!"),
+      jQuery("#valrmobile").css("display", "block"),
+      jQuery("#valAlert1email").css("display", "none"),
+      !1
+      );
+  var c = jQuery("#regi_country_code_mobile_").attr("value");
+  var countryId = jQuery("#regi_country_code_mobile_").attr("data-countryId");
+  if ("" == c && void 0 !== c)
+    return (
+      jQuery("#valrmobile").html("Please enter a Country Code!"),
+      jQuery("#valrmobile").css("display", "block"),
+      jQuery("#valAlert1email").css("display", "none"),
+      !1
+      );
+  if (0 == /^[0-9]*$/.test(c))
+    return (
+      jQuery("#valrmobile").html("Please Enter valid your Country Code."),
+      jQuery("#valrmobile").css("display", "block"),
+      jQuery("#valAlert1email").css("display", "none"),
+      !1
+      );
+  if ((jQuery("#varsign").css("display", "none"), null == o || "" == o))
+    return (
+      jQuery("#varpolicy").html("Privacy Policy is require!"),
+      jQuery("#varpolicy").css("display", "block"),
+      !1
+      );
+  jQuery("#varpolicy").css("display", "none"),
+  jQuery("#utm_newsletter_spinner_r1").css("display", "inline-block");
+  var d = minifyjsurl,
+  h = jQuery("#ex7 #signup_page_url").val(),
+  m = scratch_url + "images/scratch/coin_cursor4.png";
+  f = '<?php echo $wheel_of_fortune_landing_page ; ?>' ;
+  jQuery.ajax({
+    url: d + "customer/account/pushuserdata",
+    type: "POST",
+    data: {
+      email: e,
+      userPassword: n,
+      firstname: t,
+      lastname: "lastname",
+      mobile_number: i,
+      signup_page_url: h,
+      gender: r,
+      is_subscribed: s,
+      countrycode: c,
+      countryId:countryId,
+      referralcode:jQuery("#referralcode").val(),
+      whatsappoptin: wo
+    },
+    success: function(e) {
+
+
+      return "Email_Exists" == e
+      ? (jQuery("#valAlert1email")
+        .show()
+        .html("Email Id Account Already Exist!"),
+        jQuery("#valrmobile").css("display", "none"),
+        jQuery("#utm_newsletter_spinner_r1").css("display", "none"),
+        !1)
+      : "Countrycode_Mobilenumber_Valid" == e
+      ? (jQuery("#valrmobile")
+        .show()
+        .html("Please enter valid Country code!"),
+        jQuery("#valAlert1email").css("display", "none"),
+        jQuery("#utm_newsletter_spinner_r1").css("display", "none"),
+        !1)
+      : "Mobilenumber_Valid" == e
+      ? (jQuery("#valrmobile")
+        .show()
+        .html("Please enter valid Mobile Number!"),
+        jQuery("#valAlert1email").css("display", "none"),
+        jQuery("#utm_newsletter_spinner_r1").css("display", "none"),
+        !1)
+      : "Mobilenumber_Exists" == e
+      ? (jQuery("#valrmobile")
+        .show()
+        .html("Mobile Number is already Exist!"),
+        jQuery("#valAlert1email").css("display", "none"),
+        jQuery("#utm_newsletter_spinner_r1").css("display", "none"),
+        !1)
+      : "session_success" != e
+      ? (jQuery("#txt-error").html("Oops! Something is wrong!"),
+        jQuery("#utm_newsletter_spinner_r1").css("display", "none"),
+        !1)
+      : (jQuery(".popup_success_message").css("display", "block").html(
+        '<div class="center_text_popup">Thank you for signing up! We have sent account details to your registered email address.</div><div class="promo-container" style="display:none;"><div class="promo-code"></div></div>'
+        ),
+
+
+      jQuery('.pop_form').css("display", "none"),
+
+
+      jQuery('#popup_spin').trigger('click')
+      );
+    }
+  });
+}); 
